@@ -10,6 +10,8 @@ The motivational quote is fetched from Paperquotes `http://paperquotes.com/`. Yo
 
 You can run the default Docker image or build your own.
 
+Docker image: https://hub.docker.com/repository/docker/rafamdd/snack-time-google-chat
+
 Create a `.env` file with the properties in model.
 
 To run the node application, you must run `npm install` first, then `node index.js`;
