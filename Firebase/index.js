@@ -6,6 +6,7 @@ const firebaseCfg = {
     messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
     appId: process.env.FIREBASE_APPID
 }
+console.log(firebaseCfg)
 
 const firebase = require("firebase/app");
 
@@ -46,6 +47,17 @@ const getNextMessage = async () => {
     }
 }
 
+const publishMessage = async (messageString) => {
+    if (!messageString) {
+        return;
+    }
+
+    await firestore.collection(msgCollection).add({
+        message: messageString,
+        used: false
+    })
+}
+
 module.exports = {
-    initializeFirebase, getNextMessage
+    initializeFirebase, getNextMessage, publishMessage
 }
