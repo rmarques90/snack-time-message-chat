@@ -1,9 +1,8 @@
+require('dotenv').config();
 const axios = require('axios');
 const scheduler = require('node-schedule');
 
 const {initializeFirebase, getNextMessage} = require('./Firebase');
-
-require('dotenv').config();
 
 const BOT_WEBHOOK_URL = process.env.BOT_WEBHOOK_URL;
 

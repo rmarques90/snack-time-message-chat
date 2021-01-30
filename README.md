@@ -5,6 +5,8 @@ A simple app to send message to your company google chat to notify when it's the
 The app now uses Firestore to manage the messages to build the notification. 
 You need to set the env variables with your app credentials to work.
 
+Added a JS file to help insert new messages on database.
+
 ## Instructions
 
 You can run the default Docker image or build your own.
