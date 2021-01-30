@@ -2,9 +2,8 @@
 
 A simple app to send message to your company google chat to notify when it's the snack time, with a motivational quote!
 
-## Paperquotes API
-
-The motivational quote is fetched from Paperquotes `http://paperquotes.com/`. You need to register and retrieve a token to use this funcionality.
+The app now uses Firestore to manage the messages to build the notification. 
+You need to set the env variables with your app credentials to work.
 
 ## Instructions
 

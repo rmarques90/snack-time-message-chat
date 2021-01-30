@@ -1,4 +1,11 @@
-const firebaseCfg = require('./firebase-cfg.json');
+const firebaseCfg = {
+    apiKey: process.env.FIREBASE_APIKEY,
+    authDomain: process.env.FIREBASE_AUTHDOMAIN,
+    projectId: process.env.FIREBASE_PROJECTID,
+    storageBucket: process.env.FIREBASE_STORAGEBUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
+    appId: process.env.FIREBASE_APPID
+}
 
 const firebase = require("firebase/app");
 
@@ -10,11 +17,6 @@ let firestore;
 const msgCollection = 'messages';
 
 const initializeFirebase = () => {
-
-    if (!firebaseCfg) {
-        console.error('FirebaseCfg is not defined');
-        process.exit(1);
-    }
 
     console.log("initializing firebase conn...");
 
