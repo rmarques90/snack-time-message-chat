@@ -1,6 +1,8 @@
 const axios = require('axios');
 const scheduler = require('node-schedule');
 
+const {initializeFirebase, getNextMessage} = require('./Firebase');
+
 require('dotenv').config();
 
 const BOT_WEBHOOK_URL = process.env.BOT_WEBHOOK_URL;
@@ -10,29 +12,11 @@ if (!BOT_WEBHOOK_URL) {
     process.exit(1);
 }
 
+initializeFirebase();
+
 let cronString = process.env.CRON_STRING || '0 0 16 * * *';
 
 console.log(`App initiated with cron string: ${cronString}`);
-
-
-const getQuote = async () => {
-    try {
-        let response = await axios({
-            method: 'GET',
-            url: 'https://api.paperquotes.com/apiv1/qod/?lang=pt',
-            headers: {
-                'Authorization': 'Token ' + process.env.QUOTE_TOKEN,
-                'Content-Type': 'application/json'
-            }
-        })
-        // console.log("response", response.data);
-        if (response && response.data && response.data.quote) {
-            return response.data.quote;
-        }
-    } catch (e) {
-        console.error("Error requesting quote", e);
-    }
-}
 
 const publishToGoogleChat = async (msg) => {
     try {
@@ -93,8 +77,9 @@ const publishToGoogleChat = async (msg) => {
 }
 
 let snackJob = scheduler.scheduleJob(cronString, async () => {
-    let quoteOfDay = await getQuote();
-    await publishToGoogleChat(quoteOfDay);
+    const messageRetrivied = await getNextMessage();
+
+    await publishToGoogleChat(messageRetrivied);
 });
 
-console.log("Iniciado!");
+console.log("Iniciado com sucesso!");
