@@ -1,6 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const scheduler = require('node-schedule');
+const showerThoughts = require('shower-thoughts');
 
 const {initializeFirebase, getNextMessage} = require('./Firebase');
 
@@ -76,8 +77,11 @@ const publishToGoogleChat = async (msg) => {
 }
 
 let snackJob = scheduler.scheduleJob(cronString, async () => {
-    const messageRetrivied = await getNextMessage();
-
+    let messageRetrivied = null;
+    try {
+        let post = await showerThoughts.getThought();
+        messageRetrivied = post.title;
+    } catch (e) {}
     await publishToGoogleChat(messageRetrivied);
 });
 
