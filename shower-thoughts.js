@@ -27,8 +27,9 @@ module.exports = {
                         console.log(posts[0]);
                         resolve(posts[0]);
                     } catch (e) {
-                        console.error(e);
-                        this.getThought().then(resolve).catch(reject);
+                        // console.error(e);
+                        // this.getThought().then(resolve).catch(reject);
+                        reject(e);
                     }
                 });
                 response.on('error', err => reject(err));
@@ -36,4 +37,4 @@ module.exports = {
         });
     }
 }
-module.exports.getThought().then().catch(err => console.log('Error getting thoughts', err));
+// module.exports.getThought().then().catch(err => console.log('Error getting thoughts', err));

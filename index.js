@@ -83,6 +83,9 @@ let snackJob = scheduler.scheduleJob(cronString, async () => {
         messageRetrivied = post.title;
     } catch (e) {
         console.error(e);
+        //we will try again
+        let post = await showerThoughts.getThought();
+        messageRetrivied = post.title;
     }
     await publishToGoogleChat(messageRetrivied);
 });
