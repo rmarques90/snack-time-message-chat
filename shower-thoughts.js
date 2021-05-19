@@ -27,7 +27,7 @@ module.exports = {
                         console.log(posts[0]);
                         resolve(posts[0]);
                     } catch (e) {
-                        console.log(e);
+                        console.error(e);
                         this.getThought().then(resolve).catch(reject);
                     }
                 });

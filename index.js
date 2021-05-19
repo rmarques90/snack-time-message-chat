@@ -12,7 +12,7 @@ if (!BOT_WEBHOOK_URL) {
     process.exit(1);
 }
 
-initializeFirebase();
+// initializeFirebase();
 
 let cronString = process.env.CRON_STRING || '0 0 16 * * *';
 
@@ -81,7 +81,9 @@ let snackJob = scheduler.scheduleJob(cronString, async () => {
     try {
         let post = await showerThoughts.getThought();
         messageRetrivied = post.title;
-    } catch (e) {}
+    } catch (e) {
+        console.error(e);
+    }
     await publishToGoogleChat(messageRetrivied);
 });
 
