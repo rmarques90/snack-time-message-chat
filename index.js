@@ -1,7 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const scheduler = require('node-schedule');
-const showerThoughts = require('shower-thoughts');
+const showerThoughts = require('./shower-thoughts');
 
 const {initializeFirebase, getNextMessage} = require('./Firebase');
 
